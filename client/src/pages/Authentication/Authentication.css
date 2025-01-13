@@ -64,6 +64,7 @@ label {
   display: inline-block;
   font-size: 16px;
   margin-top: 1rem;
+  margin-bottom: 3rem;
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
@@ -103,7 +104,8 @@ label {
   }
 
   .button-log {
-    width: 14vw;
+    width: 12vw;
     height: 5vh;
+    margin: 1rem 0;
   }
 }
