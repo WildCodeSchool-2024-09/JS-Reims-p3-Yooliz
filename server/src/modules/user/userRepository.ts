@@ -9,26 +9,18 @@ type User = {
   adresse: string;
   email: string;
   phoneNumber: number;
-  password: string;
+  hashed_password: string;
   isAdmin: boolean;
 };
 
 class UserRepository {
   // The C of CRUD - Create operation
 
-  async create(user: Omit<User, "id">) {
+  async create(user: Partial<User>) {
     // Execute the SQL INSERT query to add a new item to the "item" table
     const [result] = await databaseClient.query<Result>(
-      "insert into user (title, user_id) values (?, ?)",
-      [
-        user.lastname,
-        user.firstname,
-        user.adresse,
-        user.email,
-        user.phoneNumber,
-        user.password,
-        user.isAdmin,
-      ],
+      "insert into website_user (email, hashed_password) values (?, ?)",
+      [user.email, user.hashed_password],
     );
 
     // Return the ID of the newly inserted item
@@ -56,6 +48,16 @@ class UserRepository {
 
     // Return the array of items
     return rows as User[];
+  }
+
+  async findByEmail(email: string) {
+    // Execute the SQL SELECT query to retrieve a user by email
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from website_user where email = ?",
+      [email],
+    );
+
+    return rows[0] as User | null;
   }
 
   // The U of CRUD - Update operation

@@ -1,23 +1,29 @@
 create table website_user (
   id int unsigned primary key auto_increment not null,
-  lastname varchar(255) not null,
-  firstname varchar(255) not null,
-  address tinytext not null,
+  lastname varchar(255) null,
+  firstname varchar(255) null,
+  address tinytext null,
   email varchar(255) not null unique,
-  phone_number char(10) not null,
-  password char(60) not null,
-  is_admin boolean null,
-  constraint chk_phone_number_length check (length(phone_number) = 10)
+  phone_number char(10) null,
+  hashed_password varchar(250) not null,
+  is_admin boolean default false,
+  constraint chk_phone_number_length check (length(phone_number) = 10),
+  constraint chk_email_format check (email like '%_@_%._%')
 );
+
+create index idx_email on website_user(email);
+create index idx_phone_number on website_user(phone_number);
 
 create table engine (
   id int unsigned primary key auto_increment not null,
   horsepower int unsigned not null,
-  power_type ENUM('electric', 'gas') not null,
-  consumption decimal(5, 2) null,
-  autonomy_km int unsigned not null,
+  power_type ENUM('électrique', 'essence', 'diesel') not null,
+  consumption decimal(5, 2) default null,
+  autonomy_km int unsigned default null,
   refill_price decimal(5, 2) unsigned not null
 );
+
+create index idx_power_type on engine(power_type);
 
 create table vehicle (
   id int unsigned primary key auto_increment not null,
@@ -36,6 +42,10 @@ create table vehicle (
   constraint chk_license_plate check (length(license_plate) >= 7 and length(license_plate) <= 9)
 );
 
+create index idx_owner_id on vehicle(owner_id);
+create index idx_engine_id on vehicle(engine_id);
+create index idx_license_plate on vehicle(license_plate);
+
 create table company (
   id int unsigned primary key auto_increment not null,
   company_name varchar(255) not null,
@@ -45,6 +55,8 @@ create table company (
   foreign key(owner_id) references website_user(id)
 );
 
+create index idx_owner_id on company(owner_id);
+
 create table driving_habit (
   user_id int unsigned primary key auto_increment not null,
   driven_distance int unsigned not null,
@@ -52,13 +64,25 @@ create table driving_habit (
   foreign key(user_id) references website_user(id)
 );
 
+create index idx_user_id on driving_habit(user_id);
 
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', ' [email protected]', '0123456789', 'password', true);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', ' [email protected2]', '0123456789', 'password', false);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', ' [email protected3]', '0123456789', 'password', false);
+create table queries (
+  id int unsigned primary key auto_increment not null,
+  contact_email varchar(255) not null,
+  submit_date timestamp not null default current_timestamp,
+  category ENUM('Renouvelement', 'Flotte', 'Besoin', 'Autre') not null,
+  message text not null
+);
 
-insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'electric', 0.0, 300, 50.0);
-insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'gas', 5.0, 300, 50.0);
+create index idx_contact_email on queries(contact_email);
+create index idx_category on queries(category);
+
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', 'email@example.com', '0123456789', 'password', true);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', 'email2@example.com', '0123456789', 'password', false);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', 'email3@example.com', '0123456789', 'password', false);
+
+insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'électrique', 0.0, 300, 50.0);
+insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'essence', 5.0, 300, 50.0);
 
 insert into vehicle (owner_id, brand, model, license_plate, registration_date, price, carbon_footprint, crit_air_card, engine_id) values (1, 'Renault', 'Zoe', 'AB123CD', '2020-01-01', 20000, 0.0, 1, 1);
 insert into vehicle (owner_id, brand, model, license_plate, registration_date, price, carbon_footprint, crit_air_card, engine_id) values (2, 'Renault', 'Clio', 'EF456GH', '2020-01-01', 15000, 0.0, 1, 1);

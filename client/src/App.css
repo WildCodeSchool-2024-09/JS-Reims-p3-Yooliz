@@ -7,9 +7,10 @@
 :root {
   --background-color: #f0f0f0;
   --primary-color: #27dda6;
+  --secondary-color: #27d7dd;
   --box-color: #27dda654;
-  --result-red-color: #ff000013;
-  --result-green-color: #00ff0013;
+  --result-red-color: #ff00003b;
+  --result-green-color: #00ff1e34;
   --font-color: black;
   --font-family-title: "Oxanium", sans-serif;
   --font-family-texte: "Roboto", sans-serif;

@@ -11,6 +11,8 @@
     align-items: center;
     justify-content: space-between;
     margin: 0.5rem 2rem;
+    padding: 1rem 7rem;
+    height: 4rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.196);
   }
 }
@@ -29,9 +31,11 @@
 }
 
 .btn-menu {
-  display: block;
+  width: 40px;
+  height: 40px;
+  background: transparent;
   border: none;
-  background-color: transparent;
+  color: inherit;
 }
 
 @media screen and (min-width: 600px) {
@@ -55,6 +59,46 @@
   }
 
   .header-logo {
-    margin-left: 3rem;
+    padding: 4px;
   }
+}
+
+/*aniamation*/
+
+.burger-bars,
+.burger-bars::before,
+.burger-bars::after {
+  display: block;
+  width: 40px;
+  height: 3px;
+  position: relative;
+  border-radius: 3px;
+  background: rgb(22, 19, 19);
+  transition: all 0.3s ease-in-out;
+}
+
+.burger-bars::before,
+.burger-bars::after {
+  content: "";
+  position: absolute;
+}
+
+.burger-bars::before {
+  transform: translateY(-12px);
+}
+
+.burger-bars::after {
+  transform: translateY(12px);
+}
+
+.btn-menu.show .burger-bars {
+  background: transparent;
+}
+
+.btn-menu.show .burger-bars::before {
+  transform: rotate(45deg) translate(0, 0);
+}
+
+.btn-menu.show .burger-bars::after {
+  transform: rotate(-45deg) translate(0, 0);
 }

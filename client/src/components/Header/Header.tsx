@@ -14,18 +14,18 @@ function Header() {
       <div className="sub-header-container">
         <div className="header-logo">Insert Logo here</div>
         <button
-          className="btn-menu"
+          className={`btn-menu ${isClicked ? "show" : ""}`}
           type="button"
           id="check"
           onClick={() => {
             handleClick();
           }}
         >
-          <img src="./src/assets/images/menu-3-line (2).png" alt="" />
+          <span className="burger-bars" />
         </button>
       </div>
       <nav className={`nav ${isClicked ? "show" : ""}`}>
-        <Navigation />
+        <Navigation handleClick={handleClick} />
       </nav>
     </div>
   );

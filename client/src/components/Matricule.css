@@ -77,6 +77,22 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.matricule_left_input {
+  font-family: var(--font-family-texte);
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 768px) {
+  .matricule_left_input {
+    padding: 10px 3rem;
+  }
+}
+
 .matricule {
   background-color: var(--primary-color);
   color: #fff;

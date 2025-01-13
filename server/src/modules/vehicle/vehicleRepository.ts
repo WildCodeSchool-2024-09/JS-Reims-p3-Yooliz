@@ -21,11 +21,30 @@ class VehicleRepository {
   async create(vehicle: Omit<Vehicle, "id">) {
     // Execute the SQL INSERT query to add a new vehicle to the "vehicle" table
     const [result] = await databaseClient.query<Result>(
-      "insert into vehicle (title, user_id) values (?, ?)",
-      // [vehicle.title, vehicle.user_id], // TODO: Modify this line to insert the vehicle data
+      `INSERT INTO vehicle (
+      owner_id, 
+      brand, 
+      model, 
+      license_plate, 
+      registration_date, 
+      price, 
+      carbon_footprint, 
+      crit_air_card, 
+      engine_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        vehicle.owner_id,
+        vehicle.brand,
+        vehicle.model,
+        vehicle.license_plate,
+        vehicle.registration_date,
+        vehicle.price,
+        vehicle.carbon_footprint,
+        vehicle.crit_air_card || null,
+        vehicle.engine_id,
+      ],
     );
 
-    // Return the ID of the newly inserted vehicle
     return result.insertId;
   }
 

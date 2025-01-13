@@ -10,6 +10,8 @@
   width: 300px;
   height: 400px;
   text-align: start;
+  box-shadow: 2px 4px 12px #00000014;
+  transition: 0.4s;
 }
 
 @media (min-width: 768px) {
@@ -17,6 +19,10 @@
     width: 470px;
     height: 650px;
     margin: 30px;
+  }
+
+  .vehicle-card:hover {
+    box-shadow: 2px 4px 16px #00000029;
   }
 }
 
@@ -49,7 +55,6 @@
     margin-bottom: 30px;
   }
 }
-
 .vehicle-description {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -74,6 +79,12 @@
   font-weight: bold;
   color: var(--primary-color);
   text-align: start;
+  display: flex;
+  justify-content: space-between;
+}
+
+.two-points {
+  padding-left: 10px;
 }
 
 .value {

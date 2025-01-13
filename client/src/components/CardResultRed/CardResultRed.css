@@ -1,0 +1,41 @@
+.card_red {
+  background-color: var(--result-red-color);
+  padding: 1rem 1rem 1.25rem 1rem;
+  width: 80%;
+  border-radius: 15px;
+}
+
+.card_red_content img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card_red_content {
+  height: 100%;
+}
+
+.card_red_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-top: .75rem;
+}
+
+.card_red_info h3 {
+  font-family: var(--font-family-title);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.card_red_info p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(85, 0, 0, 0.184);
+  width: 99%;
+  height: 2rem;
+  border-radius: 15px;
+  font-family: var(--font-family-texte);
+}

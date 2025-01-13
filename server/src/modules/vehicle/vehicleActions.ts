@@ -39,23 +39,26 @@ const read: RequestHandler = async (req, res, next) => {
 };
 
 // The A of BREAD - Add (Create) operation
-// const add: RequestHandler = async (req, res, next) => {
-//   try {
-// Extract the vehicle data from the request body
-// const newvehicle = {
-//   title: req.body.title,
-//   user_id: req.body.user_id,
-// };
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const newVehicle = {
+      owner_id: req.body.owner_id,
+      brand: req.body.brand,
+      model: req.body.model,
+      license_plate: req.body.license_plate,
+      registration_date: req.body.registration_date,
+      price: req.body.price,
+      engine_id: req.body.engine_id,
+      carbon_footprint: req.body.carbon_footprint || 0,
+    };
 
-// Create the vehicle
-// const insertId = await vehicleRepository.create(newVehicle); // TODO: Modify this line to insert the vehicle data
+    const insertId = await vehicleRepository.create(newVehicle);
 
-// Respond with HTTP 201 (Created) and the ID of the newly inserted vehicle
-// res.status(201).json({ insertId }); // TODO: Modify this line to return the ID of the newly inserted vehicle
-// } catch (err) { // TODO: Modify this line to catch the error
-// Pass any errors to the error-handling middleware
-//     next(err);
-//   }
-// };
+    res.status(201).json({ insertId });
+  } catch (err) {
+    console.error("Erreur lors de l'ajout d'un véhicule :", err);
+    next(err);
+  }
+};
 
-export default { browse, read /*add */ };
+export default { browse, read, add };

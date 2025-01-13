@@ -43,15 +43,15 @@ const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the user data from the request body
     const newUser = {
-      title: req.body.title,
-      user_id: req.body.user_id,
+      email: req.body.email,
+      hashed_password: req.body.hashed_password,
     };
 
     // Create the user
-    // const insertId = await userRepository.create(newUser);
+    const insertId = await userRepository.create(newUser);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted user
-    // res.status(201).json({ insertId });
+    res.status(201).json({ insertId });
   } catch (err) {
     // Pass any errors to the error-handling middleware
     next(err);
