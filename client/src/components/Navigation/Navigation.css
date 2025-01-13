@@ -52,12 +52,14 @@
     box-shadow: none;
     padding: .25rem;
     border: 2px var(--primary-color);
-    transition: .5s;
+    transition: .2s;
+    border-radius: 0px;
   }
 
   .navbar-button:hover {
     border-bottom: 2px solid var(--secondary-color);
     border-radius: 0px;
     margin-top: 2px;
+    padding-bottom: .5rem;
   }
 }

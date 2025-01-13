@@ -10,6 +10,13 @@
   align-items: center;
 }
 
+@media screen and (min-width: 768px) {
+  .options-sub-container {
+    flex-wrap: wrap;
+    height: 65vh;
+  }
+}
+
 .options-h2 {
   font-family: var(--font-family-title);
   font-size: 2rem;
@@ -18,28 +25,41 @@
 .options-label {
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 1.5rem;
-  width: 100%;
-  gap: 0.5rem;
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
+  font-family: var(--font-family-texte);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: px) {
   .options-label {
     width: 50%;
   }
 }
 
-.options-p {
-  text-align: left;
+.options-input {
+  border: .5px solid var(--secondary-color);
+  font-family: var(--font-family-texte);
+  border-radius: 20px;
+  height: 2rem;
+  width: 20rem;
   padding: 0.5rem;
 }
 
-.options-input {
-  border: .5px solid var(--primary-color);
+.options-roulage-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+
+.options-select {
+  height: 2rem;
+  width: 20rem;
+  border: .5px solid var(--secondary-color);
   border-radius: 20px;
-  height: 2.25rem;
-  padding: 0.5rem;
+  padding-left: 1rem;
+  font-size: 0.75rem;
+  font-family: var(--font-family-texte);
 }
 
 .options-button {
@@ -52,6 +72,14 @@
   .options-button {
     justify-content: right;
     margin: 4rem 4rem 0 0;
+  }
+
+  .right {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
 
