@@ -102,7 +102,7 @@ function Options() {
         </div>
       </form>
       <div className="options-button">
-        <Link to="/log" className="next-page">
+        <Link to="/authentication" className="next-page">
           Valider
         </Link>
       </div>
