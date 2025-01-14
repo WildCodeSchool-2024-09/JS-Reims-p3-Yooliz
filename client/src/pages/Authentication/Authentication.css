@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 7vh;
-  margin-top: 3rem;
+  margin: 3rem 0;
 }
 
 .log-container h2 {
@@ -57,14 +57,14 @@ label {
 .button-log {
   width: 40vw;
   height: 5vh;
+  float: right;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
   color: white;
   text-align: center;
-  display: inline-block;
   font-size: 16px;
   margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
@@ -104,8 +104,14 @@ label {
   }
 
   .button-log {
-    width: 12vw;
+    width: 10vw;
     height: 5vh;
     margin: 1rem 0;
+  }
+
+  .button-log:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid var(--secondary-color);
   }
 }
