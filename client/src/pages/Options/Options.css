@@ -12,8 +12,8 @@
 
 @media screen and (min-width: 768px) {
   .options-sub-container {
+    display: flex;
     flex-wrap: wrap;
-    height: 65vh;
   }
 }
 
@@ -37,12 +37,14 @@
 }
 
 .options-input {
-  border: .5px solid var(--secondary-color);
+  width: 80vw;
+  border: .5px solid var(--primary-color);
   font-family: var(--font-family-texte);
-  border-radius: 20px;
-  height: 2rem;
-  width: 20rem;
-  padding: 0.5rem;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
 }
 
 .options-roulage-container {
@@ -53,13 +55,21 @@
 }
 
 .options-select {
-  height: 2rem;
-  width: 20rem;
-  border: .5px solid var(--secondary-color);
-  border-radius: 20px;
-  padding-left: 1rem;
-  font-size: 0.75rem;
+  width: 80vw;
+  border: .5px solid var(--primary-color);
   font-family: var(--font-family-texte);
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.right-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .options-button {
@@ -71,15 +81,33 @@
 @media screen and (min-width: 768px) {
   .options-button {
     justify-content: right;
-    margin: 4rem 4rem 0 0;
+    width: 85vw;
+    height: 5vh;
+    margin: 1rem 0;
   }
 
-  .right {
+  .right-cont {
     height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .option-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .options-input {
+    width: 30vw;
+    height: 5vh;
+  }
+
+  .options-select {
+    width: 30vw;
+    height: 5vh;
   }
 }
 
