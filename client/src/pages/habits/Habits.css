@@ -59,6 +59,7 @@
   height: 5vh;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
+  font-family: var(--font-family-texte);
   color: white;
   text-align: center;
   display: inline-block;
@@ -85,6 +86,7 @@
   .habits button {
     width: 7rem;
     transition: 0.4s;
+    font-family: var(--font-family-texte);
   }
 
   .habits-container {

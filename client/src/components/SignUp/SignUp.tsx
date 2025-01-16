@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import type { FormEventHandler } from "react";
+import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import type { WebsiteUser } from "../../types/types";
 
@@ -7,6 +8,20 @@ function SignUp() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
+  const [passwordType, setPasswordType] = useState("password");
+
+  const [confirmpasswordType, setConfirmPasswordType] = useState("password");
+
+  const handlePasswordToggle = () => {
+    setPasswordType(passwordType === "password" ? "text" : "password");
+  };
+
+  const handleConfirmPasswordToggle = () => {
+    setConfirmPasswordType(
+      confirmpasswordType === "password" ? "text" : "password",
+    );
+  };
 
   const { setUser } = useOutletContext<{
     setUser: (user: WebsiteUser | null) => void;
@@ -70,24 +85,68 @@ function SignUp() {
             placeholder="Votre email"
             required
           />
+
           <label htmlFor="password">Mot de passe</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Votre mot de passe"
-            required
-          />
+          <div className="password-input-container">
+            <input
+              ref={passwordRef}
+              type={passwordType}
+              id="password"
+              name="password"
+              placeholder="Votre mot de passe"
+              required
+            />
+            <button
+              type="button"
+              onClick={handlePasswordToggle}
+              className="password-toggle-button"
+            >
+              {passwordType === "password" ? (
+                <img
+                  src="./src/assets/icons/close-eye.png"
+                  alt="Show password"
+                  className="password-icon"
+                />
+              ) : (
+                <img
+                  src="./src/assets/icons/view.png"
+                  alt="Hide password"
+                  className="password-icon"
+                />
+              )}
+            </button>
+          </div>
+
           <label htmlFor="confirm-password">Confirmer mot de passe</label>
-          <input
-            ref={confirmPasswordRef}
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-            placeholder="Confirmez votre mot de passe"
-            required
-          />
+          <div className="password-input-container">
+            <input
+              ref={confirmPasswordRef}
+              type={confirmpasswordType}
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="Confirmez votre mot de passe"
+              required
+            />
+            <button
+              type="button"
+              onClick={handleConfirmPasswordToggle}
+              className="password-toggle-button"
+            >
+              {confirmpasswordType === "password" ? (
+                <img
+                  src="./src/assets/icons/close-eye.png"
+                  alt="Show password"
+                  className="password-icon"
+                />
+              ) : (
+                <img
+                  src="./src/assets/icons/view.png"
+                  alt="Hide password"
+                  className="password-icon"
+                />
+              )}
+            </button>
+          </div>
         </div>
         <button type="submit" className="button-log">
           S'inscrire

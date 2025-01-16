@@ -15,11 +15,11 @@
   transition: 0.5s;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .nav-container {
     flex-direction: row;
     justify-content: space-between;
-    gap: none;
+    gap: 0;
     width: 100%;
     position: relative;
     z-index: none;
@@ -28,38 +28,37 @@
   }
 }
 
-.navbar-button {
-  width: 90%;
+.nav-link {
   align-items: center;
   text-decoration: none;
   text-align: center;
-  color: #27dda6;
-  border: 1px solid rgba(2, 251, 209, 0.9);
-  border-radius: 1rem;
   padding: 20px;
-  transition: 0.3s;
-  box-shadow: var(--box-shadow);
 }
 
-@media screen and (min-width: 600px) {
-  .navbar-button {
+@media screen and (min-width: 768px) {
+  .nav-link {
     width: 10%;
     color: #000000;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
-    border: 0px;
-    box-shadow: none;
     padding: .25rem;
-    border: 2px var(--primary-color);
-    transition: .2s;
-    border-radius: 0px;
+    transition: color 0.3s ease-in-out;
+    position: relative;
   }
 
-  .navbar-button:hover {
-    border-bottom: 2px solid var(--secondary-color);
-    border-radius: 0px;
-    margin-top: 2px;
-    padding-bottom: .5rem;
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease-in-out;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
   }
 }

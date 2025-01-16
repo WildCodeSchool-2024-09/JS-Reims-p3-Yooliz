@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+.sensibilisation-page p {
+  font-family: var(--font-family-texte);
+}
+.sensibilisation-page li {
+  font-family: var(--font-family-texte);
+}
+
 .header {
   background-image: url("https://i.imgur.com/40wJxlf.png");
   background-size: cover;
@@ -139,6 +146,7 @@
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  font-family: var(--font-family-texte);
 }
 
 .comparaison-co2 h2 {
@@ -149,6 +157,7 @@
 
 .button-thermique {
   background-color: rgba(255, 0, 0, 0.5);
+  font-family: var(--font-family-texte);
 }
 
 .button-thermique:hover {
@@ -157,6 +166,7 @@
 
 .button-electrique {
   background-color: rgba(0, 189, 132, 0.6);
+  font-family: var(--font-family-texte);
 }
 
 .button-electrique:hover {
@@ -172,6 +182,7 @@
   color: #ffffff;
   font-size: 0.7em;
   cursor: pointer;
+  font-family: var(--font-family-texte);
   transition: background-color 0.3s;
   border-radius: 30px;
 }
@@ -184,5 +195,6 @@
   .comparaison-co2 button {
     font-size: 1em;
     margin: 0 80px;
+    font-family: var(--font-family-texte);
   }
 }

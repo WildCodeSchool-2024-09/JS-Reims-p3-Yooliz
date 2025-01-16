@@ -5,6 +5,13 @@ import { useNavigate } from "react-router-dom";
 function SignIn() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const [passwordType, setPasswordType] = useState("password");
+
+  const handlePasswordToggle = () => {
+    setPasswordType(passwordType === "password" ? "text" : "password");
+  };
+
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -71,14 +78,35 @@ function SignIn() {
             required
           />
           <label htmlFor="password">Mot de passe</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Votre mot de passe"
-            required
-          />
+          <div className="password-input-container">
+            <input
+              ref={passwordRef}
+              type={passwordType}
+              id="password"
+              name="password"
+              placeholder="Votre mot de passe"
+              required
+            />
+            <button
+              type="button"
+              onClick={handlePasswordToggle}
+              className="password-toggle-button"
+            >
+              {passwordType === "password" ? (
+                <img
+                  src="./src/assets/icons/close-eye.png"
+                  alt="Show password"
+                  className="password-icon"
+                />
+              ) : (
+                <img
+                  src="./src/assets/icons/view.png"
+                  alt="Hide password"
+                  className="password-icon"
+                />
+              )}
+            </button>
+          </div>
         </div>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit" className="button-log">

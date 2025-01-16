@@ -58,4 +58,5 @@
   font-size: 1rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 2rem;
+  font-family: var(--font-family-texte);
 }

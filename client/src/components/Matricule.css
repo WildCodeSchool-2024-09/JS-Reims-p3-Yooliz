@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  margin-bottom: 3rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -95,6 +96,8 @@
 
 .matricule {
   background-color: var(--primary-color);
+  font-family: var(--font-family-texte);
+
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -125,6 +128,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 5rem;
   }
   .mat_separator hr {
     display: flex;

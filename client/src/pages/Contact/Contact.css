@@ -83,6 +83,7 @@
   height: 5vh;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
+  font-family: var(--font-family-texte);
   color: white;
   text-align: center;
   display: inline-block;
@@ -118,6 +119,7 @@
     width: 10vw;
     height: 5vh;
     margin: 1rem 0;
+    font-family: var(--font-family-texte);
   }
 
   .button-contact:hover {
