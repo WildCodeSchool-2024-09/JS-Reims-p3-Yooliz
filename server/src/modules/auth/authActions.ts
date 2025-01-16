@@ -39,7 +39,7 @@ const hashPassword: RequestHandler = async (req, res, next) => {
 
     return next();
   } catch (err) {
-    console.error("Erreur lors du hachage du mot de passe :", err);
+    console.error("Error while hashing the password:", err);
 
     return next(err);
   }
@@ -57,7 +57,7 @@ const login: RequestHandler = async (req, res, next) => {
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
-      res.status(401).json({ message: "Identifiants incorrects." });
+      res.status(401).json({ message: "Invalid credentials." });
       return;
     }
 
@@ -78,36 +78,33 @@ const login: RequestHandler = async (req, res, next) => {
       },
     );
 
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 3600000,
+    });
+
     const { hashed_password, ...userWithoutPassword } = user;
+
     res.status(200).json({
-      token,
+      message: "Connexion réussie.",
       user: userWithoutPassword,
     });
 
     return;
   } catch (err) {
-    console.error("Erreur lors de la connexion :", err);
+    console.error("Error during login:", err);
     next(err);
   }
 };
 
 const verifyToken: RequestHandler = (req, res, next) => {
   try {
-    const authorizationHeader = req.get("Authorization");
+    const token = req.cookies.authToken;
 
-    if (!authorizationHeader) {
-      res
-        .status(401)
-        .json({ message: "Le header Authorization est manquant." });
-      return;
-    }
-
-    const [type, token] = authorizationHeader.split(" ");
-
-    if (type !== "Bearer" || !token) {
-      res.status(401).json({
-        message: "Le header Authorization doit utiliser le type 'Bearer'.",
-      });
+    if (!token) {
+      res.status(401).json({ message: "Token missing in cookies." });
       return;
     }
 
@@ -116,13 +113,14 @@ const verifyToken: RequestHandler = (req, res, next) => {
       process.env.JWT_SECRET as string,
     ) as MyPayload;
 
-    req.auth = decoded;
+    (req.auth as MyPayload) = decoded;
 
     next();
   } catch (err) {
-    console.error("Erreur lors de la vérification du token :", err);
-    res.status(401).json({ message: "Token invalide ou expiré." });
+    console.error("Error while verifying the token:", err);
+    res.status(401).json({ message: "Invalid or expired token." });
     return;
   }
 };
+
 export default { hashPassword, login: [loginLimiter, login], verifyToken };
