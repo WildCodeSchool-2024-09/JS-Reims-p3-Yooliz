@@ -18,57 +18,59 @@ function Options() {
         <h2 className="options-h2">Des Options ?</h2>
       </div>
       <form action="">
-        <div className="options-sub-container">
-          <label htmlFor="date" className="options-label">
-            Date prévisionnel du renouvellement de la flotte ou du vehicule ?
-          </label>
-          <select name="date" id="date" className="options-select">
-            <option value="3-mois">3 mois</option>
-            <option value="3-mois">6 mois</option>
-            <option value="3-mois">1 an</option>
-          </select>
-          <label htmlFor="date" className="options-label">
-            Quelle est votre marque de voiture préférée ?
-          </label>
-          <input
-            type="text"
-            name="options"
-            placeholder="Ex: Mercedes"
-            autoComplete="off"
-            className="options-input"
-          />
-          <label htmlFor="text" className="options-label">
-            Nouvelles habitudes de roulage
-          </label>
-          <div className="options-roulage-container">
+        <div className="option-cont">
+          <div className="options-sub-container">
+            <label htmlFor="date" className="options-label">
+              Date prévisionnel du renouvellement de la flotte ou du vehicule ?
+            </label>
+            <select name="date" id="date" className="options-select">
+              <option value="3-mois">3 mois</option>
+              <option value="3-mois">6 mois</option>
+              <option value="3-mois">1 an</option>
+            </select>
+            <label htmlFor="date" className="options-label">
+              Quelle est votre marque de voiture préférée ?
+            </label>
             <input
               type="text"
               name="options"
-              list="options"
+              placeholder="Ex: Mercedes"
               autoComplete="off"
-              placeholder="Ex: 20km"
               className="options-input"
             />
-            <select id="options" className="options-select">
-              <option>jour</option>
-              <option>mois</option>
-              <option>année</option>
-            </select>
-            <input
-              type="text"
-              name="options"
-              list="options"
-              autoComplete="off"
-              placeholder="Fréquences"
-              className="options-input"
-            />
-            <select id="options" className="options-select">
-              <option>jour</option>
-              <option>mois</option>
-              <option>année</option>
-            </select>
+            <label htmlFor="text" className="options-label">
+              Nouvelles habitudes de roulage
+            </label>
+            <div className="options-roulage-container">
+              <input
+                type="text"
+                name="options"
+                list="options"
+                autoComplete="off"
+                placeholder="Ex: 20km"
+                className="options-input"
+              />
+              <select id="options" className="options-select">
+                <option>jour</option>
+                <option>mois</option>
+                <option>année</option>
+              </select>
+              <input
+                type="text"
+                name="options"
+                list="options"
+                autoComplete="off"
+                placeholder="Fréquences"
+                className="options-input"
+              />
+              <select id="options" className="options-select">
+                <option>jour</option>
+                <option>mois</option>
+                <option>année</option>
+              </select>
+            </div>
           </div>
-          <div className="right">
+          <div className="right-cont">
             <label htmlFor="text" className="options-label">
               Coût de l'assurance à l'année
             </label>
