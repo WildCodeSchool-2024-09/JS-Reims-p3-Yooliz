@@ -10,6 +10,7 @@ import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import InfosEnviro from "./pages/Info/InfosEnviro";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Options from "./pages/Options/Options";
 import Result from "./pages/Result/Result";
 import Confirm from "./pages/confirmVehicle/confirmVehicle";
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <div>Page non trouvée</div>,
+        element: <NotFoundPage />,
       },
       {
         path: "/admin",

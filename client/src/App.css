@@ -15,6 +15,9 @@
   --font-family-title: "Oxanium", sans-serif;
   --font-family-texte: "Roboto", sans-serif;
   --box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  --focus-color: #007bff;
+  --focus-offset: 4px;
+  --focus-style: 2px dashed;
 }
 
 h1 {
