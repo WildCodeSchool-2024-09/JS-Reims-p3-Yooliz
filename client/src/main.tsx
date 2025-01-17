@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
+import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
 import Comparer from "./pages/Comparer/Comparer";
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },
