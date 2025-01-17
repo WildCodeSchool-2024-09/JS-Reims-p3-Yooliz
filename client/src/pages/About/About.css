@@ -1,0 +1,122 @@
+.about-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-image: url(../src/assets/images/bg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .about-section {
+    height: 100vh;
+    background-repeat: no-repeat;
+  }
+}
+
+.about-content {
+  max-width: 650px;
+  margin: 60px 60px;
+}
+
+@media screen and (min-width: 768px) {
+  .about-content {
+    margin: 60px 60px;
+    width: 45%;
+  }
+}
+
+.about-logo {
+  line-height: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  br {
+    display: none;
+  }
+}
+
+.about-content .about-info h2 {
+  color: #226a80;
+  font-size: 55px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 30px;
+  font-size: 3rem;
+}
+
+@media screen and (min-width: 768px) {
+  .about-content .about-info h2 {
+    color: #226a80;
+    font-size: 55px;
+    text-transform: uppercase;
+    font-weight: 800;
+    line-height: 60px;
+    margin-bottom: 30px;
+    font-size: 4rem;
+  }
+}
+
+.about-content .about-info h2 span {
+  font-size: 2.5rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 768px) {
+  .about-content .about-info h2 span {
+    font-size: 4rem;
+    color: #fff;
+    font-weight: 600;
+  }
+}
+
+.about-card {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  border: solid 3px #226a80;
+}
+
+@media screen and (min-width: 768px) {
+  .about-card {
+    padding: 0;
+    margin-bottom: 2rem;
+    border-radius: 0;
+    backdrop-filter: none;
+    border: none;
+  }
+}
+
+.about-content .about-info p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.about-content .about-btn {
+  color: #fff;
+  background: #226a80;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+  transition-property: background;
+}
+
+.about-content .about-btn:hover {
+  background-color: var(--secondary-color);
+  color: #fff;
+}

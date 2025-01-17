@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
+import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
 import Comparer from "./pages/Comparer/Comparer";
@@ -10,6 +11,7 @@ import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import InfosEnviro from "./pages/Info/InfosEnviro";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Options from "./pages/Options/Options";
 import Result from "./pages/Result/Result";
 import Confirm from "./pages/confirmVehicle/confirmVehicle";
@@ -64,7 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <div>Page non trouvée</div>,
+        element: <NotFoundPage />,
       },
       {
         path: "/options",
@@ -73,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

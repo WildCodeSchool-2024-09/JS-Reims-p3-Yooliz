@@ -1,0 +1,63 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4caf50, #2196f3);
+  color: #ffffff;
+}
+
+.not-found-content {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.not-found-title {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.not-found-text {
+  font-family: var(--font-family-texte);
+  font-size: 1.2rem;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 auto;
+}
+
+.back-to-home-link {
+  text-decoration: none;
+  font-family: var(--font-family-texte);
+  font-size: 1.2rem;
+}
+
+.back-to-home-link a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: var(--focus-style) var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+.back-to-home-link a:focus-visible {
+  text-decoration: underline;
+}
+
+.back-to-home-link a:hover {
+  color: #fff700;
+}
+
+.not-found-text,
+.back-to-home-link {
+  display: block;
+}
