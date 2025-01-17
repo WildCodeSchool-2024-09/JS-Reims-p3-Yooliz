@@ -105,7 +105,6 @@
 }
 
 .sources {
-  background-color: #6b6b6b0e;
   padding: 20px;
   line-height: 1.4;
   list-style: none;
@@ -128,7 +127,6 @@
 .comparaison-co2 {
   margin: 10px;
   padding: 15px;
-  height: 100%;
 }
 
 .comparaison-co2-chart {
