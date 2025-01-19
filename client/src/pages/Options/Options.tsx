@@ -1,4 +1,5 @@
 import "./Options.css";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FilAriane from "../../components/FilAriane";
 
@@ -7,7 +8,23 @@ function Options() {
   const navigate = useNavigate();
   const { vehicleData, habitsData } = location.state || {};
 
+  const [insuranceCost, setInsuranceCost] = useState("");
+  const [tripType, setTripType] = useState("");
+  const [mixedTripDetails, setMixedTripDetails] = useState("");
+  const [renewalDate, setRenewalDate] = useState("");
+  const [differentBrand, setDifferentBrand] = useState("");
+  const [tripModifications, setTripModifications] = useState("");
+
   const handleSubmit = () => {
+    const optionsData = {
+      insuranceCost: insuranceCost ? Number.parseFloat(insuranceCost) : null,
+      tripType: tripType || null,
+      mixedTripDetails: mixedTripDetails || null,
+      renewalDate: renewalDate || null,
+      differentBrand: differentBrand || null,
+      tripModifications: tripModifications || null,
+    };
+
     navigate("/result", {
       state: {
         vehicleData,
@@ -16,6 +33,7 @@ function Options() {
           fuelPrice: 1.8,
           electricityPrice: 0.15,
         },
+        optionsData,
       },
     });
   };
@@ -41,7 +59,13 @@ function Options() {
               Date prévisionnelle du renouvellement de la flotte ou du vehicule
               ?
             </label>
-            <select name="date" id="date" className="options-select">
+            <select
+              name="date"
+              id="date"
+              className="options-select"
+              value={renewalDate}
+              onChange={(e) => setRenewalDate(e.target.value)}
+            >
               <option value="3-mois">3 mois</option>
               <option value="3-mois">6 mois</option>
               <option value="3-mois">1 an</option>
@@ -55,6 +79,8 @@ function Options() {
               placeholder="Ex: Mercedes"
               autoComplete="off"
               className="options-input"
+              value={differentBrand}
+              onChange={(e) => setDifferentBrand(e.target.value)}
             />
             <label htmlFor="text" className="options-label">
               Modifications des déplacements
@@ -67,6 +93,8 @@ function Options() {
                 autoComplete="off"
                 placeholder="Ex: 20km"
                 className="options-input"
+                value={tripModifications}
+                onChange={(e) => setTripModifications(e.target.value)}
               />
               <select id="options" className="options-select">
                 <option>Quotidien</option>
@@ -87,11 +115,18 @@ function Options() {
               autoComplete="off"
               placeholder="Ex: 840€"
               className="options-input"
+              value={insuranceCost}
+              onChange={(e) => setInsuranceCost(e.target.value)}
             />
             <label htmlFor="text" className="options-label">
               Type de déplacements
             </label>
-            <select id="mode-de-vie" className="options-select">
+            <select
+              id="mode-de-vie"
+              className="options-select"
+              value={tripType}
+              onChange={(e) => setTripType(e.target.value)}
+            >
               <option>Privé</option>
               <option>Professionnel</option>
               <option>Mixte</option>
@@ -99,7 +134,13 @@ function Options() {
             <label htmlFor="text" className="options-label">
               Si mixte, merci de préciser
             </label>
-            <select name="options" className="options-input" defaultValue="Non">
+            <select
+              name="options"
+              className="options-input"
+              defaultValue="Non"
+              value={mixedTripDetails}
+              onChange={(e) => setMixedTripDetails(e.target.value)}
+            >
               <option value="Non">Non</option>
               <option value="Oui">Oui</option>
             </select>

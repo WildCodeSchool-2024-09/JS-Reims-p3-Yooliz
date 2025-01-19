@@ -40,9 +40,20 @@ const Result = () => {
   const {
     vehicleData,
     habitsData,
+    optionsData,
+    user,
   }: {
     vehicleData: Vehicle;
     habitsData: { distance: number; option: keyof typeof multipliers };
+    optionsData: {
+      insuranceCost: number | null;
+      tripType: string | null;
+      mixedTripDetails: string | null;
+      renewalDate: string | null;
+      differentBrand: string | null;
+      tripModifications: string | null;
+    };
+    user?: { id: number; email: string };
   } = location.state || {};
 
   const [electricVehicle, setElectricVehicle] =
@@ -103,6 +114,29 @@ const Result = () => {
             ? similarElectricVehicle.engine.consumption * totalDistance
             : 0,
         });
+
+        await fetch(`${import.meta.env.VITE_API_URL}/api/history`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user?.id || 0,
+            email: user?.email || "",
+            vehicle_brand: vehicleData.brand,
+            vehicle_model: vehicleData.model,
+            compared_vehicle_brand: similarElectricVehicle?.brand || "",
+            compared_vehicle_model: similarElectricVehicle?.model || "",
+            yearly_savings: (fuelCost - electricCost) * 365,
+            distance: habitsData.distance,
+            insurance_cost: optionsData.insuranceCost,
+            trip_type: optionsData.tripType,
+            mixed_trip_details: optionsData.mixedTripDetails,
+            renewal_date: optionsData.renewalDate,
+            different_brand: optionsData.differentBrand,
+            trip_modifications: optionsData.tripModifications,
+          }),
+        });
       } catch (error) {
         setError(
           error instanceof Error ? error.message : "An unknown error occurred",
@@ -113,7 +147,19 @@ const Result = () => {
     };
 
     fetchAndCalculate();
-  }, [vehicleData, habitsData, navigate]);
+  }, [
+    vehicleData,
+    habitsData,
+    navigate,
+    user?.id,
+    user?.email,
+    optionsData.insuranceCost,
+    optionsData.tripType,
+    optionsData.mixedTripDetails,
+    optionsData.renewalDate,
+    optionsData.differentBrand,
+    optionsData.tripModifications,
+  ]);
 
   if (isLoading) return <div>Calcul des résultats en cours...</div>;
   if (error) return <div>Erreur: {error}</div>;

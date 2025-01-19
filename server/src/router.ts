@@ -8,6 +8,7 @@ const router = express.Router();
 
 import authActions from "./modules/auth/authActions";
 import engineActions from "./modules/engine/engineActions";
+import historyActions from "./modules/history/historyActions";
 import itemActions from "./modules/item/itemActions";
 import queriesActions from "./modules/queries/queriesActions";
 import userActions from "./modules/user/userActions";
@@ -22,6 +23,9 @@ router.get("/api/engine/:id", engineActions.read);
 router.post("/api/vehicle", vehicleActions.add);
 
 router.use(authActions.verifyToken);
+
+router.get("/api/history", historyActions.browse);
+router.post("/api/history", historyActions.add);
 
 router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);
