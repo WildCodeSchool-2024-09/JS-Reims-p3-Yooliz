@@ -14,15 +14,16 @@ interface VehicleData {
 
 type VehicleCardProps = {
   vehicleData: VehicleData;
+  size: "small" | "large";
 };
 
-function VehicleCard({ vehicleData }: VehicleCardProps) {
+function VehicleCard({ vehicleData, size }: VehicleCardProps) {
   if (!vehicleData || !vehicleData.engine) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="vehicle-card">
+    <div className={`vehicle-card card-size--${size}`}>
       <img
         className="vehicle-image"
         src={vehicleData.car_picture}

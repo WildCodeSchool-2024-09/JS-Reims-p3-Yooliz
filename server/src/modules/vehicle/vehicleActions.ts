@@ -1,20 +1,24 @@
-import type { RequestHandler } from "express";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
 
 // To infity and beyond
 // Import access to data
 import vehicleRepository from "./vehicleRepository";
 
-// The B of BREAD - Browse (Read All) operation
-const browse: RequestHandler = async (req, res, next) => {
+const browse: RequestHandler = async (req, res, next): Promise<void> => {
   try {
-    // Fetch all vehicles
-    const vehicles = await vehicleRepository.readAll();
+    const token = req.cookies.authToken;
 
-    // Respond with the vehicles in JSON format
-    res.json(vehicles);
+    if (!token) {
+      res.status(401).json({ message: "Accès non autorisé : Token manquant." });
+      return;
+    }
+
+    const userId = Number(req.auth?.sub ?? 4); // Utilise 4 comme valeur par défaut
+    const vehicles = await vehicleRepository.readAll(userId);
+
+    res.json(vehicles); // Envoie la réponse
   } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
+    next(err); // Passer les erreurs au middleware de gestion des erreurs
   }
 };
 

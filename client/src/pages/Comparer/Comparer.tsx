@@ -7,6 +7,7 @@ function Comparer() {
       <h1>Comparer les véhicules</h1>
       <div className="vehicle-list">
         <VehicleCard
+          size="large"
           vehicleData={{
             brand: "Toyota",
             model: "Corolla",

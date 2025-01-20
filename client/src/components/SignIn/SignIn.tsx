@@ -1,12 +1,24 @@
 import { useRef, useState } from "react";
 import type { FormEventHandler } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
+type User = {
+  id: number;
+  email: string;
+  isAdmin: boolean;
+};
+
+type Auth = {
+  user: User;
+};
 
 function SignIn() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-
   const [passwordType, setPasswordType] = useState("password");
+  const { setAuth } = useOutletContext() as {
+    setAuth: (auth: Auth | null) => void;
+  };
 
   const handlePasswordToggle = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
@@ -49,6 +61,8 @@ function SignIn() {
       );
 
       if (response.ok) {
+        const auth = await response.json();
+        setAuth(auth);
         navigate("/");
       } else if (response.status === 401) {
         setErrorMessage("Identifiants incorrects.");

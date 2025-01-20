@@ -8,6 +8,7 @@ const router = express.Router();
 
 import authActions from "./modules/auth/authActions";
 import engineActions from "./modules/engine/engineActions";
+import historyActions from "./modules/history/historyActions";
 import itemActions from "./modules/item/itemActions";
 import queriesActions from "./modules/queries/queriesActions";
 import userActions from "./modules/user/userActions";
@@ -23,6 +24,9 @@ router.post("/api/vehicle", vehicleActions.add);
 
 router.use(authActions.verifyToken);
 
+router.get("/api/history", historyActions.browse);
+router.post("/api/history", historyActions.add);
+
 router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);
 router.post("/api/items", itemActions.add);
@@ -36,8 +40,8 @@ router.delete("/api/queries/:id", queriesActions.remove);
 router.get("/api/users", userActions.browse);
 router.get("/api/users/:id", userActions.read);
 
-router.get("/api/vehicle", vehicleActions.browse);
-router.get("/api/vehicle/:id", vehicleActions.read);
+router.get("/api/vehicles", vehicleActions.browse);
+router.get("/api/vehicles/:id", vehicleActions.read);
 
 router.get("/api/protected-user", (req, res) => {
   if (!req.auth) {

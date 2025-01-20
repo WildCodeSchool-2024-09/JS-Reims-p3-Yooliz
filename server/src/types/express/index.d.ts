@@ -8,6 +8,7 @@ declare global {
 
   namespace Express {
     export interface Request {
+      cookies: { [key: string]: string };
       auth?: MyPayload;
     }
   }

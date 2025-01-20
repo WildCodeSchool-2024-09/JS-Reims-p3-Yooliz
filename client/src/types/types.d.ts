@@ -26,6 +26,7 @@ export interface Vehicle {
   refillPrice?: number;
   drivenDistance?: number;
   fuelCost?: number;
+  year?: number;
 }
 
 export interface Company {

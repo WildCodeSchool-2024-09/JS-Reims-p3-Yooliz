@@ -1,7 +1,61 @@
 import "./Compte.css";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import avatar from "../../assets/images/538474-user_512x512.webp";
+import VehicleCard from "../../components/VehicleCard/VehicleCard";
+
+interface Vehicle {
+  id: number;
+  brand: string;
+  model: string;
+  licensePlate: string;
+  powerType: string;
+  horsepower: number;
+  price: number;
+  imageUrl: string;
+}
+
+type User = {
+  id: number;
+  email: string;
+  isAdmin?: boolean;
+};
+
+type Auth = {
+  user: User;
+  message: string;
+};
 
 function Compte() {
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const { auth } = useOutletContext() as { auth: Auth | null };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userId = auth?.user?.id;
+      try {
+        const response = await fetch(
+          `http://localhost:3310/api/vehicles?userId=${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          },
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setVehicles(data);
+      } catch (error) {
+        console.info("fetchData", error);
+      }
+    };
+    fetchData();
+  }, [auth]);
+
   return (
     <>
       <div className="compte">
@@ -31,8 +85,23 @@ function Compte() {
               <button type="button">Modifier mes véhicules ✏️</button>
             </div>
             <div className="box-contenu">
-              <div className="car-card-green"> </div>
-              <div className="car-card-green"> </div>
+              {vehicles?.map((vehicle) => (
+                <VehicleCard
+                  key={vehicle.id}
+                  size="small"
+                  vehicleData={{
+                    brand: vehicle.brand,
+                    model: vehicle.model,
+                    license_plate: vehicle.licensePlate,
+                    engine: {
+                      power_type: vehicle.powerType,
+                      horsepower: vehicle.horsepower,
+                    },
+                    price: vehicle.price,
+                    car_picture: vehicle.imageUrl,
+                  }}
+                />
+              ))}
             </div>
           </div>
           <div className="compte-box">
@@ -54,5 +123,4 @@ function Compte() {
     </>
   );
 }
-
 export default Compte;

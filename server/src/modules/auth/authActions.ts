@@ -72,7 +72,7 @@ const login: RequestHandler = async (req, res, next) => {
         sub: user.id,
         isAdmin: user.isAdmin,
       },
-      process.env.JWT_SECRET as string,
+      process.env.APP_SECRET as string,
       {
         expiresIn: "1h",
       },
@@ -110,7 +110,7 @@ const verifyToken: RequestHandler = (req, res, next) => {
 
     const decoded = jwt.verify(
       token,
-      process.env.JWT_SECRET as string,
+      process.env.APP_SECRET as string,
     ) as MyPayload;
 
     (req.auth as MyPayload) = decoded;

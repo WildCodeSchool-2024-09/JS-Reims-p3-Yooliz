@@ -61,9 +61,12 @@ class VehicleRepository {
     return rows[0] as Vehicle;
   }
 
-  async readAll() {
+  async readAll(userId: number) {
     // Execute the SQL SELECT query to retrieve all vehicles from the "vehicle" table
-    const [rows] = await databaseClient.query<Rows>("select * from vehicle");
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from vehicle where owner_id = ?",
+      [userId],
+    );
 
     // Return the array of vehicles
     return rows as Vehicle[];
