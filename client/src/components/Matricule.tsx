@@ -23,11 +23,13 @@ interface Vehicle {
 
 export default function Matricule({ onValidate }: MatriculeProps) {
   const [immatriculation, setImmatriculation] = useState("");
+  const [showError, setShowError] = useState(false);
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [brands, setBrands] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
+  const [, setIsValidFormat] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -87,18 +89,85 @@ export default function Matricule({ onValidate }: MatriculeProps) {
     navigate("/confirm", { state: { vehicleData } });
   };
 
+  const formatLicensePlate = (value: string): string => {
+    const cleaned = value.replace(/-/g, "").toUpperCase();
+
+    if (cleaned.length > 5) {
+      return `${cleaned.slice(0, 2)}-${cleaned.slice(2, 5)}-${cleaned.slice(5)}`;
+    }
+    if (cleaned.length > 2) {
+      return `${cleaned.slice(0, 2)}-${cleaned.slice(2)}`;
+    }
+    return cleaned;
+  };
+
+  const validateFormat = (value: string): boolean => {
+    if (value.length < 3) return true;
+
+    const cleaned = value.replace(/-/g, "");
+    const pattern = /^[A-Z]{2}\d{0,3}[A-Z]{0,2}$/;
+
+    if (!pattern.test(cleaned)) return false;
+
+    if (cleaned.length === 7) {
+      return /^[A-Z]{2}\d{3}[A-Z]{2}$/.test(cleaned);
+    }
+
+    if (cleaned.length >= 3) {
+      const pos3to5 = cleaned.slice(2, 5);
+      if (pos3to5.length > 0 && !/^\d*$/.test(pos3to5)) return false;
+    }
+
+    return true;
+  };
+
   const handleImmatriculationChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
-    if (value.length > 2) value = `${value.slice(0, 2)}-${value.slice(2)}`;
-    if (value.length > 6) value = `${value.slice(0, 6)}-${value.slice(6, 8)}`;
-    setImmatriculation(value);
+    let value = e.target.value;
+    if (value.length <= 9) {
+      value = formatLicensePlate(value);
+      setImmatriculation(value);
+      const isValid = validateFormat(value);
+      setIsValidFormat(isValid && value.replace(/-/g, "").length === 7);
+      setShowError(!isValid && value.length >= 3);
+    }
   };
 
   const isValidImmatriculation = /^[A-Z]{2}-\d{3}-[A-Z]{2}$/.test(
     immatriculation,
   );
+
+  const styles = {
+    buttonContainer: {
+      height: "120px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+    },
+    errorMessage: {
+      color: "#FF0000",
+      fontSize: "12px",
+      fontFamily: "var(--font-family-texte)",
+      textAlign: "center" as const,
+      lineHeight: "1.5",
+      padding: "10px",
+      backgroundColor: "#FFF",
+      borderRadius: "5px",
+      width: "100%",
+      height: "40px",
+      margin: "40px 0",
+      display: "flex",
+      flexDirection: "column" as const,
+      justifyContent: "center",
+    },
+    button: {
+      height: "40px",
+      margin: "40px 0",
+      cursor: (isValid: boolean) => (isValid ? "pointer" : "not-allowed"),
+    },
+  };
 
   return (
     <div className="matricule_container">
@@ -117,32 +186,35 @@ export default function Matricule({ onValidate }: MatriculeProps) {
                 maxLength={9}
               />
             </div>
-            <p
-              className="info-plaque-text"
-              style={{
-                color: "#FF0000",
-                fontSize: "12px",
-                fontFamily: "var(--font-family-texte)",
-                textAlign: "center",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Veuillez entrer une plaque valide au format AB-123-CD.
-              <br /> Si vous disposez d'une ancienne plaque, veuillez nous
-              contacter via <a href="/contact">notre formulaire</a>.
-            </p>
+            <div style={styles.buttonContainer}>
+              {showError ? (
+                <div style={styles.errorMessage}>
+                  <p>Veuillez entrer une plaque valide au format AB-123-CD.</p>
+                  <p>
+                    Si vous disposez d'une ancienne plaque, merci de prendre
+                    contact via&nbsp;
+                    <a href="/contact" style={{ textDecoration: "underline" }}>
+                      notre formulaire
+                    </a>
+                    .
+                  </p>
+                </div>
+              ) : (
+                <button
+                  className="matricule"
+                  type="submit"
+                  onClick={handleSubmit}
+                  disabled={!isValidImmatriculation}
+                  style={{
+                    ...styles.button,
+                    cursor: styles.button.cursor(isValidImmatriculation),
+                  }}
+                >
+                  Valider
+                </button>
+              )}
+            </div>
           </div>
-          <button
-            className="matricule"
-            type="submit"
-            onClick={handleSubmit}
-            disabled={!isValidImmatriculation}
-            style={{
-              cursor: isValidImmatriculation ? "pointer" : "not-allowed",
-            }}
-          >
-            Valider
-          </button>
         </div>
         <div className="mat_separator">
           <hr />

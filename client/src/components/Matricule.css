@@ -72,7 +72,7 @@
 .matricule_left_input {
   font-family: var(--font-family-texte);
   padding: 10px;
-  margin: 50px 10px 10px 10px;
+  margin: 10px;
   font-size: 16px;
   width: 18rem;
   border: 1px solid #ccc;
@@ -92,7 +92,7 @@
 
   color: #fff;
   padding: 10px 20px;
-  margin-bottom: 1rem;
+  margin: 2rem 0;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -204,4 +204,10 @@
 
 .car_info select option {
   padding: 0.5rem;
+}
+
+.matricule-input-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
 }
