@@ -37,24 +37,15 @@ const Result = () => {
   const navigate = useNavigate();
 
   const multipliers = { jour: 1, semaine: 7, mois: 30, an: 365 };
-  const {
-    vehicleData,
-    habitsData,
-    optionsData,
-    user,
-  }: {
-    vehicleData: Vehicle;
-    habitsData: { distance: number; option: keyof typeof multipliers };
-    optionsData: {
-      insuranceCost: number | null;
-      tripType: string | null;
-      mixedTripDetails: string | null;
-      renewalDate: string | null;
-      differentBrand: string | null;
-      tripModifications: string | null;
-    };
-    user?: { id: number; email: string };
-  } = location.state || {};
+  const { vehicleData, habitsData, optionsData, user } = location.state || {};
+
+  // Validate required data
+  useEffect(() => {
+    if (!vehicleData || !habitsData || !habitsData.option) {
+      navigate("/");
+      return;
+    }
+  }, [vehicleData, habitsData, navigate]);
 
   const [electricVehicle, setElectricVehicle] =
     useState<ElectricVehicle | null>(null);
@@ -63,7 +54,9 @@ const Result = () => {
   );
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedFrequency, setSelectedFrequency] = useState(habitsData.option);
+  const [selectedFrequency, setSelectedFrequency] = useState<
+    keyof typeof multipliers
+  >((habitsData?.option as keyof typeof multipliers) || "jour");
 
   const formatFrequency = (value: number, frequency: string) => {
     return `${value.toFixed(2)} € par ${frequency}`;
@@ -93,7 +86,8 @@ const Result = () => {
         const fuelPrice = 1.8;
         const electricityPrice = 0.15;
         const totalDistance =
-          habitsData.distance * multipliers[habitsData.option];
+          habitsData.distance *
+          multipliers[habitsData.option as keyof typeof multipliers];
 
         const fuelCost =
           (vehicleData.engine.consumption / 100) *
@@ -129,12 +123,12 @@ const Result = () => {
             compared_vehicle_model: similarElectricVehicle?.model || "",
             yearly_savings: (fuelCost - electricCost) * 365,
             distance: habitsData.distance,
-            insurance_cost: optionsData.insuranceCost,
-            trip_type: optionsData.tripType,
-            mixed_trip_details: optionsData.mixedTripDetails,
-            renewal_date: optionsData.renewalDate,
-            different_brand: optionsData.differentBrand,
-            trip_modifications: optionsData.tripModifications,
+            insurance_cost: optionsData.insuranceCost || null,
+            trip_type: optionsData.tripType || null,
+            mixed_trip_details: optionsData.mixedTripDetails || null,
+            renewal_date: optionsData.renewalDate || null,
+            different_brand: optionsData.differentBrand || null,
+            trip_modifications: optionsData.tripModifications || null,
           }),
         });
       } catch (error) {
@@ -209,6 +203,10 @@ const Result = () => {
     habitsData.option,
     selectedFrequency,
   );
+
+  if (!vehicleData || !habitsData) {
+    return <div>Données manquantes. Redirection...</div>;
+  }
 
   return (
     <>

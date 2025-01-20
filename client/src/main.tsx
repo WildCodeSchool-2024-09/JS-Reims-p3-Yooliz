@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import About from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
@@ -16,8 +17,6 @@ import Options from "./pages/Options/Options";
 import Result from "./pages/Result/Result";
 import Confirm from "./pages/confirmVehicle/confirmVehicle";
 import Habits from "./pages/habits/Habits";
-
-/* ************************************************************************* */
 
 const router = createBrowserRouter([
   {
@@ -62,15 +61,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/result",
-        element: <Result />,
+        element: (
+          <ProtectedRoute>
+            <Result />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "*",
         element: <NotFoundPage />,
-      },
-      {
-        path: "/options",
-        element: <Options />,
       },
       {
         path: "/admin",
@@ -86,7 +85,7 @@ const router = createBrowserRouter([
 
 const rootElement = document.getElementById("root");
 if (rootElement == null) {
-  throw new Error(`Your HTML Document should contain a <div id="root"></div>`);
+  throw new Error("Failed to find the root element");
 }
 
 createRoot(rootElement).render(

@@ -1,11 +1,23 @@
 import "./Options.css";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import FilAriane from "../../components/FilAriane";
+
+type User = {
+  id: number;
+  email: string;
+  isAdmin: boolean;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
 
 function Options() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { auth } = useOutletContext<{ auth: Auth | null }>();
   const { vehicleData, habitsData } = location.state || {};
 
   const [insuranceCost, setInsuranceCost] = useState("");
@@ -24,17 +36,26 @@ function Options() {
       differentBrand: differentBrand || null,
       tripModifications: tripModifications || null,
     };
-    navigate("/result", {
-      state: {
-        vehicleData,
-        habitsData: {
-          ...habitsData,
-          fuelPrice: 1.8,
-          electricityPrice: 0.15,
+
+    if (!auth) {
+      navigate("/authentication", {
+        state: {
+          redirectTo: "/result",
+          vehicleData,
+          habitsData,
+          optionsData,
         },
-        optionsData,
-      },
-    });
+      });
+    } else {
+      navigate("/result", {
+        state: {
+          vehicleData,
+          habitsData,
+          optionsData,
+          user: auth.user,
+        },
+      });
+    }
   };
 
   return (
@@ -62,11 +83,13 @@ function Options() {
               name="date"
               id="date"
               className="options-select"
+              value={renewalDate}
               onChange={(e) => setRenewalDate(e.target.value)}
             >
+              <option value="">Sélectionnez une option</option>
               <option value="3-mois">3 mois</option>
-              <option value="3-mois">6 mois</option>
-              <option value="3-mois">1 an</option>
+              <option value="6-mois">6 mois</option>
+              <option value="1-an">1 an</option>
             </select>
             <label htmlFor="date" className="options-label">
               Envisageriez-vous une marque différente ?
@@ -77,6 +100,7 @@ function Options() {
               placeholder="Ex: Mercedes"
               autoComplete="off"
               className="options-input"
+              value={differentBrand}
               onChange={(e) => setDifferentBrand(e.target.value)}
             />
             <label htmlFor="text" className="options-label">
@@ -90,6 +114,7 @@ function Options() {
                 autoComplete="off"
                 placeholder="Ex: 20km"
                 className="options-input"
+                value={tripModifications}
                 onChange={(e) => setTripModifications(e.target.value)}
               />
               <select id="options" className="options-select">
@@ -111,6 +136,7 @@ function Options() {
               autoComplete="off"
               placeholder="Ex: 840€"
               className="options-input"
+              value={insuranceCost}
               onChange={(e) => setInsuranceCost(e.target.value)}
             />
             <label htmlFor="text" className="options-label">
@@ -119,11 +145,13 @@ function Options() {
             <select
               id="mode-de-vie"
               className="options-select"
+              value={tripType}
               onChange={(e) => setTripType(e.target.value)}
             >
-              <option>Privé</option>
-              <option>Professionnel</option>
-              <option>Mixte</option>
+              <option value="">Sélectionnez une option</option>
+              <option value="Privé">Privé</option>
+              <option value="Professionnel">Professionnel</option>
+              <option value="Mixte">Mixte</option>
             </select>
             <label htmlFor="text" className="options-label">
               Si mixte, merci de préciser
@@ -131,8 +159,9 @@ function Options() {
             <select
               name="options"
               className="options-input"
-              defaultValue="Non"
+              value={mixedTripDetails}
               onChange={(e) => setMixedTripDetails(e.target.value)}
+              defaultValue="Non"
             >
               <option value="Non">Non</option>
               <option value="Oui">Oui</option>
