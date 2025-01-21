@@ -1,0 +1,135 @@
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.options-sub-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .options-sub-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.options-h2 {
+  font-family: var(--font-family-title);
+  font-size: 2rem;
+}
+
+.options-label {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
+  font-family: var(--font-family-texte);
+}
+
+@media screen and (min-width: px) {
+  .options-label {
+    width: 50%;
+  }
+}
+
+.options-input {
+  width: 80vw;
+  border: .5px solid var(--primary-color);
+  font-family: var(--font-family-texte);
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.options-input::placeholder {
+  font-family: var(--font-family-texte);
+  font-size: 16px;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.options-roulage-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+
+.options-select {
+  width: 80vw;
+  border: .5px solid var(--primary-color);
+  font-family: var(--font-family-texte);
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.right-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.options-button {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  font-family: var(--font-family-texte);
+}
+
+@media screen and (min-width: 768px) {
+  .options-button {
+    justify-content: right;
+    width: 85vw;
+    height: 5vh;
+    margin: 1rem 0;
+    font-family: var(--font-family-texte);
+  }
+
+  .right-cont {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .options-input {
+    width: 30vw;
+    height: 5vh;
+  }
+
+  .options-select {
+    width: 30vw;
+    height: 5vh;
+  }
+}
+
+.next-page {
+  text-decoration: none;
+  font-family: var(--font-family-texte);
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}

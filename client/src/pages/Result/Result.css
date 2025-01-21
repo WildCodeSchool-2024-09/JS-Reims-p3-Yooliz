@@ -1,0 +1,104 @@
+.result_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result_container h2 {
+  text-align: center;
+  font-family: var(--font-family-title);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.result_card_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.result_cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin: 2rem auto;
+}
+
+.result_cards > * {
+  flex: 1;
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.annual_summary {
+  background-color: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 800px;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.annual_summary h3 {
+  font-family: var(--font-family-title);
+  color: #333;
+  margin-bottom: 0;
+  font-size: 1.8rem;
+}
+
+.annual_summary p {
+  font-family: var(--font-family-texte);
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+@media screen and (max-width: 768px) {
+  .result_cards {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 90%;
+  }
+
+  .result_cards > * {
+    width: 100%;
+  }
+
+  .annual_summary {
+    width: 90%;
+  }
+}
+
+.frequency-select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-family: var(--font-family-texte);
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.frequency-select:hover:not(:disabled) {
+  border-color: var(--result-green-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.frequency-select:focus {
+  outline: none;
+  border-color: var(--result-green-color);
+  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
+}

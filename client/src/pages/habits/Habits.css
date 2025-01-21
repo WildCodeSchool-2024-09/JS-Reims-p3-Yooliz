@@ -1,0 +1,171 @@
+.habits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  height: 100%;
+}
+
+.habits h2 {
+  font-family: var(--font-family-title);
+  font-size: 2rem;
+  margin: 0;
+}
+
+.habits input {
+  width: 60vw;
+  max-width: 300px;
+  border: .5px solid var(--primary-color);
+  font-family: var(--font-family-texte);
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.habits label {
+  width: 20rem;
+  text-align: center;
+  padding: 0;
+}
+
+.habits-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 80px;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.input-container-distance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-container-frequency {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.input-container-distance,
+.input-container-frequency {
+  position: relative;
+  width: 100%;
+}
+
+.option {
+  padding: 0 0.6rem;
+  height: 2.6rem;
+  width: 60vw;
+  max-width: 300px;
+  text-align: start;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: var(--font-family-texte);
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--result-green-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option:focus {
+  outline: none;
+  border-color: var(--result-green-color);
+  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
+}
+
+.error-message-habits {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #ff0f0f;
+  font-size: 0.7rem;
+  font-family: var(--font-family-texte);
+  animation: slideIn 0.3s ease-in-out;
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  pointer-events: none;
+}
+
+.error-habits {
+  border-color: #d32f2f !important;
+  background-color: #fff5f5;
+  text-align: start;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.habits button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 1.5rem 0;
+}
+
+.habits button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+}
+
+.habits button:disabled {
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .habits-container {
+    width: 55vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .habits button:hover {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: #000000;
+  }
+
+  .button-cont {
+    width: 55vw;
+    display: flex;
+    justify-content: end;
+  }
+}

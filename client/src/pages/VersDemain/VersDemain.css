@@ -1,0 +1,200 @@
+.sensibilisation-page {
+  font-family: Arial, sans-serif;
+  color: #000000;
+  padding: 0;
+}
+
+.sensibilisation-page p {
+  font-family: var(--font-family-texte);
+}
+.sensibilisation-page li {
+  font-family: var(--font-family-texte);
+}
+
+.header {
+  background-image: url("https://i.imgur.com/40wJxlf.png");
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px 20px 20px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    background-position-y: 75%;
+  }
+}
+
+.header-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  filter: drop-shadow(2px 2px 8px #000000aa);
+  text-align: left;
+}
+
+.header-text {
+  font-size: 1.2em;
+  filter: drop-shadow(2px 2px 8px #000000aa);
+  margin-bottom: 20px;
+  text-align: end;
+  font-style: italic;
+  background-color: #00000029;
+  border-radius: 10px;
+  padding: 10px;
+  width: 75%;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .header-text {
+    width: 40%;
+    text-wrap: wrap;
+    text-align: center;
+  }
+}
+
+.transition-ecologique,
+.avantages-electrique {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.transition-ecologique h2,
+.avantages-electrique h2 {
+  font-size: 1.6rem;
+  color: #00bd84;
+  margin-bottom: 10px;
+}
+
+.transition-ecologique p,
+.avantages-electrique p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.avantages-electrique ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.avantages-electrique li {
+  margin-bottom: 10px;
+}
+
+.faq {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ecfaed;
+  line-height: 1.4;
+}
+
+.faq h2 {
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 1.6rem;
+}
+
+.faq ul {
+  list-style: none;
+  line-height: 1.8;
+}
+
+.sources {
+  background-color: #6b6b6b0e;
+  padding: 20px;
+  line-height: 1.4;
+  list-style: none;
+  text-align: end;
+}
+
+.sources h2 {
+  color: #00bd84;
+  text-align: end;
+}
+
+.sources li {
+  list-style: none;
+}
+
+.sources a {
+  text-decoration: none;
+}
+
+.comparaison-co2 {
+  margin: 10px;
+  padding: 15px;
+  height: 100%;
+}
+
+.comparaison-co2-chart {
+  height: 280px;
+}
+
+@media screen and (min-width: 768px) {
+  .comparaison-co2-chart {
+    height: 350px;
+  }
+}
+
+.comparaison-co2 .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-family: var(--font-family-texte);
+}
+
+.comparaison-co2 h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.button-thermique {
+  background-color: rgba(255, 0, 0, 0.5);
+  font-family: var(--font-family-texte);
+}
+
+.button-thermique:hover {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.button-electrique {
+  background-color: rgba(0, 189, 132, 0.6);
+  font-family: var(--font-family-texte);
+}
+
+.button-electrique:hover {
+  background-color: rgba(0, 189, 132, 1);
+}
+
+.comparaison-co2 button {
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  text-wrap: wrap;
+  width: 80ch;
+  color: #ffffff;
+  font-size: 0.7em;
+  cursor: pointer;
+  font-family: var(--font-family-texte);
+  transition: background-color 0.3s;
+  border-radius: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .comparaison-co2 {
+    margin: 30px 25%;
+  }
+
+  .comparaison-co2 button {
+    font-size: 1em;
+    margin: 0 80px;
+    font-family: var(--font-family-texte);
+  }
+}
