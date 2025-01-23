@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type User = {
   id: number;
@@ -17,6 +17,19 @@ type Auth = {
 
 export default function App() {
   const [auth, setAuth] = useState<Auth | null>(null);
+
+  useEffect(() => {
+    if (!auth) {
+      const storedAuth = sessionStorage.getItem("auth");
+
+      if (storedAuth) {
+        setAuth(JSON.parse(storedAuth));
+      }
+      return;
+    }
+
+    sessionStorage.setItem("auth", JSON.stringify(auth));
+  }, [auth]);
 
   return (
     <div className="app-container">
