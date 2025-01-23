@@ -17,19 +17,25 @@ type Auth = {
 
 export default function App() {
   const [auth, setAuth] = useState<Auth | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   useEffect(() => {
-    if (!auth) {
-      const storedAuth = sessionStorage.getItem("auth");
-
-      if (storedAuth) {
-        setAuth(JSON.parse(storedAuth));
-      }
-      return;
+    const storedAuth = sessionStorage.getItem("auth");
+    if (storedAuth) {
+      setAuth(JSON.parse(storedAuth));
     }
+    setIsAuthLoading(false);
+  }, []);
 
-    sessionStorage.setItem("auth", JSON.stringify(auth));
+  useEffect(() => {
+    if (auth) {
+      sessionStorage.setItem("auth", JSON.stringify(auth));
+    }
   }, [auth]);
+
+  if (isAuthLoading) {
+    return <div className="loading-screen">Chargement...</div>;
+  }
 
   return (
     <div className="app-container">
