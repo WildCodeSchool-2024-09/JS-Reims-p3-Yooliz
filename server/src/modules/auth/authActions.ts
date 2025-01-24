@@ -123,4 +123,39 @@ const verifyToken: RequestHandler = (req, res, next) => {
   }
 };
 
-export default { hashPassword, login: [loginLimiter, login], verifyToken };
+const verifyAuth: RequestHandler = async (req, res, next) => {
+  try {
+    const token = req.cookies.authToken;
+
+    if (!token) {
+      res.status(401).json({ message: "Token missing in cookies." });
+      return;
+    }
+
+    const decoded = jwt.verify(
+      token,
+      process.env.APP_SECRET as string,
+    ) as MyPayload;
+
+    (req.auth as MyPayload) = decoded;
+
+    const userId = req.auth?.sub;
+    const user = await userRepository.findById(userId);
+
+    res.status(200).json({
+      message: "Connexion réussie.",
+      user: user,
+    });
+    return;
+  } catch (err) {
+    res.status(401).json({ message: "Invalid or expired token." });
+    return;
+  }
+};
+
+export default {
+  hashPassword,
+  login: [loginLimiter, login],
+  verifyToken,
+  verifyAuth,
+};

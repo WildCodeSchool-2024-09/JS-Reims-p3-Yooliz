@@ -83,6 +83,14 @@ class UserRepository {
     return rows[0] as User | null;
   }
 
+  async findById(userId: string | undefined) {
+    // Execute the SQL SELECT query to retrieve a user by email
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from website_user where id = ?",
+      [userId],
+    );
+  }
+
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing item
 
