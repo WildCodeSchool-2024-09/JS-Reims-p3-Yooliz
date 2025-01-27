@@ -65,4 +65,19 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add };
+const remove: RequestHandler = async (req, res, next) => {
+  try {
+    const vehicleId = Number(req.params.id);
+    const userId = Number(req.auth?.sub);
+    const vehicle = {
+      id: vehicleId,
+      owner_id: userId,
+    };
+    await vehicleRepository.delete(vehicle);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, add, remove };

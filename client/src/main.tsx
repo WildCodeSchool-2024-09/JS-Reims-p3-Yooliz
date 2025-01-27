@@ -4,12 +4,14 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { ComparisonProvider } from "./context/ComparisonContext";
+import QuiSommesNous from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
-import Comparer from "./pages/Comparer/Comparer";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
+import MonComparatif from "./pages/MonComparatif/MonComparatif";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Options from "./pages/Options/Options";
 import Result from "./pages/Result/Result";
@@ -35,12 +37,20 @@ const router = createBrowserRouter([
         element: <Authentication />,
       },
       {
-        path: "/comparer",
-        element: <Comparer />,
+        path: "/moncomparatif",
+        element: (
+          <ProtectedRoute>
+            <MonComparatif />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/compte",
-        element: <Compte />,
+        element: (
+          <ProtectedRoute>
+            <Compte />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/versdemain",
@@ -71,12 +81,12 @@ const router = createBrowserRouter([
         element: <NotFoundPage />,
       },
       {
-        path: "/options",
-        element: <Options />,
-      },
-      {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/quisommesnous",
+        element: <QuiSommesNous />,
       },
     ],
   },
@@ -89,6 +99,8 @@ if (rootElement == null) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ComparisonProvider>
+      <RouterProvider router={router} />
+    </ComparisonProvider>
   </StrictMode>,
 );

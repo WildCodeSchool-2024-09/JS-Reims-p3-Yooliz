@@ -1,6 +1,8 @@
 import "./VehicleCard.css";
+import { useState } from "react";
 
 interface VehicleData {
+  id: number;
   brand: string;
   model: string;
   license_plate: string;
@@ -18,12 +20,45 @@ type VehicleCardProps = {
 };
 
 function VehicleCard({ vehicleData, size }: VehicleCardProps) {
+  const [isDeleted, setIsDeleted] = useState(false);
+
   if (!vehicleData || !vehicleData.engine) {
     return <div>Loading...</div>;
   }
 
+  const handleDelete = () => {
+    fetch(`http://localhost:3310/api/vehicles/${vehicleData.id}`, {
+      method: "DELETE",
+      credentials: "include",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setIsDeleted(true);
+        } else {
+          console.error("Failed to delete vehicle");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting vehicle:", error);
+      });
+    setIsDeleted(!isDeleted);
+  };
+
+  if (isDeleted) {
+    return <div className="vehicle-card-suppressed" />;
+  }
+
   return (
-    <div className={`vehicle-card card-size--${size}`}>
+    <div
+      className={`vehicle-card card-size--${size} ${isDeleted ? "deleted" : ""}`}
+    >
+      <button
+        type="button"
+        onClick={handleDelete}
+        className={`delete-button ${isDeleted ? "hidden" : ""}`}
+      >
+        Supprimer
+      </button>
       <img
         className="vehicle-image"
         src={vehicleData.car_picture}

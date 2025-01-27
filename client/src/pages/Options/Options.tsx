@@ -71,103 +71,112 @@ function Options() {
           }}
         />
         <h2 className="options-h2">Des Options ?</h2>
+        <p className="options-p">
+          Ces informations nous aideront à personnaliser nos conseils. <br />{" "}
+          Vous pouvez les ignorer et passer directement au calcul de vos
+          économies.
+        </p>
       </div>
-      <form action="">
-        <div className="option-cont">
-          <div className="options-sub-container">
-            <label htmlFor="date" className="options-label">
-              Date prévisionnelle du renouvellement de la flotte ou du vehicule
-              ?
-            </label>
-            <select
-              name="date"
-              id="date"
-              className="options-select"
-              value={renewalDate}
-              onChange={(e) => setRenewalDate(e.target.value)}
-            >
-              <option value="">Sélectionnez une option</option>
-              <option value="3-mois">3 mois</option>
-              <option value="6-mois">6 mois</option>
-              <option value="1-an">1 an</option>
-            </select>
-            <label htmlFor="date" className="options-label">
-              Envisageriez-vous une marque différente ?
-            </label>
-            <input
-              type="text"
-              name="options"
-              placeholder="Ex: Mercedes"
-              autoComplete="off"
-              className="options-input"
-              value={differentBrand}
-              onChange={(e) => setDifferentBrand(e.target.value)}
-            />
-            <label htmlFor="text" className="options-label">
-              Modifications des déplacements
-            </label>
-            <div className="options-roulage-container">
-              <input
-                type="text"
-                name="options"
-                list="options"
-                autoComplete="off"
-                placeholder="Ex: 20km"
+      <form action="" className="options-form">
+        <fieldset className="options-section">
+          <legend className="options-legend">Informations Génériques</legend>
+          <label htmlFor="date" className="options-label">
+            Date prévisionnelle du renouvellement ?
+          </label>
+          <select
+            name="date"
+            id="date"
+            className="options-select"
+            value={renewalDate}
+            onChange={(e) => setRenewalDate(e.target.value)}
+          >
+            <option value="">Sélectionnez une option</option>
+            <option value="3-mois">3 mois</option>
+            <option value="6-mois">6 mois</option>
+            <option value="1-an">1 an</option>
+          </select>
+
+          <label htmlFor="differentBrand" className="options-label">
+            Souhaitez-vous changer de marque ?
+          </label>
+          <input
+            type="text"
+            id="differentBrand"
+            placeholder="Ex: Mercedes"
+            className="options-input"
+            value={differentBrand}
+            onChange={(e) => setDifferentBrand(e.target.value)}
+          />
+
+          <label htmlFor="insuranceCost" className="options-label">
+            Coût de l'assurance à l'année
+          </label>
+          <input
+            type="text"
+            id="insuranceCost"
+            placeholder="Ex: 840€"
+            className="options-input"
+            value={insuranceCost}
+            onChange={(e) => setInsuranceCost(e.target.value)}
+          />
+        </fieldset>
+
+        <fieldset className="options-section">
+          <legend className="options-legend">
+            Options liées aux Déplacements
+          </legend>
+          <label htmlFor="tripType" className="options-label">
+            Type de déplacements
+          </label>
+          <select
+            id="tripType"
+            className="options-select"
+            value={tripType}
+            onChange={(e) => setTripType(e.target.value)}
+          >
+            <option value="">Sélectionnez une option</option>
+            <option value="Privé">Privé</option>
+            <option value="Professionnel">Professionnel</option>
+            <option value="Mixte">Mixte</option>
+          </select>
+
+          {tripType === "Mixte" && (
+            <>
+              <label htmlFor="mixedTripDetails" className="options-label">
+                Si mixte, merci de préciser
+              </label>
+              <select
+                id="mixedTripDetails"
                 className="options-input"
-                value={tripModifications}
-                onChange={(e) => setTripModifications(e.target.value)}
-              />
-              <select id="options" className="options-select">
-                <option>Quotidien</option>
-                <option>Hebdomadaire</option>
-                <option>Mensuel</option>
-                <option>Annuel</option>
+                value={mixedTripDetails}
+                onChange={(e) => setMixedTripDetails(e.target.value)}
+              >
+                <option value="Non">Non</option>
+                <option value="Oui">Oui</option>
               </select>
-            </div>
-          </div>
-          <div className="right-cont">
-            <label htmlFor="text" className="options-label">
-              Coût de l'assurance à l'année
-            </label>
+            </>
+          )}
+
+          <label htmlFor="tripModifications" className="options-label">
+            Modifications des déplacements
+          </label>
+          <div className="options-roulage-container">
             <input
               type="text"
-              name="options"
-              list="options-2"
-              autoComplete="off"
-              placeholder="Ex: 840€"
+              id="tripModifications"
+              placeholder="Ex: 20km"
               className="options-input"
-              value={insuranceCost}
-              onChange={(e) => setInsuranceCost(e.target.value)}
+              value={tripModifications}
+              onChange={(e) => setTripModifications(e.target.value)}
             />
-            <label htmlFor="text" className="options-label">
-              Type de déplacements
-            </label>
-            <select
-              id="mode-de-vie"
-              className="options-select"
-              value={tripType}
-              onChange={(e) => setTripType(e.target.value)}
-            >
-              <option value="">Sélectionnez une option</option>
-              <option value="Privé">Privé</option>
-              <option value="Professionnel">Professionnel</option>
-              <option value="Mixte">Mixte</option>
-            </select>
-            <label htmlFor="text" className="options-label">
-              Si mixte, merci de préciser
-            </label>
-            <select
-              name="options"
-              className="options-input"
-              value={mixedTripDetails}
-              onChange={(e) => setMixedTripDetails(e.target.value)}
-              defaultValue="Non"
-            >
-              <option value="Non">Non</option>
-              <option value="Oui">Oui</option>
+            <select id="tripFrequency" className="options-select">
+              <option>Quotidien</option>
+              <option>Hebdomadaire</option>
+              <option>Mensuel</option>
+              <option>Annuel</option>
             </select>
           </div>
-        </div>
+        </fieldset>
       </form>
       <div className="options-button">
         <button type="button" onClick={handleSubmit} className="next-page">

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CardResultGreen from "../../components/CardResultGreen/CardResultGreen";
 import CardResultRed from "../../components/CardResultRed/CardResultRed";
 import FilAriane from "../../components/FilAriane";
+import { useComparison } from "../../context/ComparisonContext";
 import "./Result.css";
 
 interface Vehicle {
@@ -35,6 +36,7 @@ interface ComparisonData {
 const Result = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { setLastComparison } = useComparison();
 
   const multipliers = { jour: 1, semaine: 7, mois: 30, an: 365 };
   const { vehicleData, habitsData, optionsData, user } = location.state || {};
@@ -98,7 +100,7 @@ const Result = () => {
             electricityPrice
           : 0;
 
-        setComparisonData({
+        const calculatedData = {
           fuelCost,
           electricCost,
           savings: fuelCost - electricCost,
@@ -106,13 +108,31 @@ const Result = () => {
           electricConsumption: similarElectricVehicle
             ? similarElectricVehicle.engine.consumption * totalDistance
             : 0,
-        });
+        };
+
+        setComparisonData(calculatedData);
+
+        const comparisonData = {
+          vehicleData,
+          electricVehicle: similarElectricVehicle,
+          calculations: {
+            fuelCost: calculatedData.fuelCost,
+            electricCost: calculatedData.electricCost,
+            savings: calculatedData.savings,
+            co2Emission: calculatedData.co2Emission,
+            distance: habitsData.distance,
+            frequency: habitsData.option,
+          },
+        };
+
+        setLastComparison(comparisonData);
 
         await fetch(`${import.meta.env.VITE_API_URL}/api/history`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({
             user_id: user?.id || 0,
             email: user?.email || "",
@@ -152,6 +172,7 @@ const Result = () => {
     optionsData?.renewalDate,
     optionsData?.differentBrand,
     optionsData?.tripModifications,
+    setLastComparison,
   ]);
 
   if (isLoading) return <div>Calcul des résultats en cours...</div>;

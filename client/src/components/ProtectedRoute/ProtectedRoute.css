@@ -1,0 +1,9 @@
+.loading-auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: var(--font-family-texte);
+  color: #000000;
+  font-size: 1.2rem;
+}

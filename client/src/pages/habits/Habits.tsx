@@ -51,40 +51,37 @@ function Habits() {
         }}
       />
       <div className="habits">
-        <h2>Mes habitudes</h2>
+        <h2>Mes habitudes de déplacement</h2>
         <div className="habits-container">
           <div className="input-container">
-            <div className="input-container-distance">
-              <label htmlFor="distance">Distance parcourue (en km)</label>
+            <div className="input-line-container">
+              <span>Je parcours en moyenne</span>
               <input
                 type="text"
                 name="distance"
+                placeholder="Ex: 15"
                 className={`distance-input ${distanceError ? "error-habits" : ""}`}
                 value={distance}
                 onChange={handleDistanceChange}
               />
-            </div>
-            {distanceError && (
-              <span className="error-message-habits">{distanceError}</span>
-            )}
-          </div>
-          <div className="input-container">
-            <label className="frequency-label" htmlFor="frequence">
-              Fréquence des déplacements
-            </label>
-            <div className="input-container-frequency">
+              <span>
+                <strong>km</strong> &nbsp;par
+              </span>
               <select
                 name="frequence"
                 className="option"
                 value={option}
                 onChange={(e) => setOption(e.target.value)}
               >
-                <option value="jour">Quotidien </option>
-                <option value="semaine">Hebdomadaire </option>
-                <option value="mois">Mensuel </option>
-                <option value="an">Annuel </option>
+                <option value="jour">Jour</option>
+                <option value="semaine">Semaine</option>
+                <option value="mois">Mois</option>
+                <option value="an">An</option>
               </select>
             </div>
+            {distanceError && (
+              <span className="error-message-habits">{distanceError}</span>
+            )}
           </div>
         </div>
         <button

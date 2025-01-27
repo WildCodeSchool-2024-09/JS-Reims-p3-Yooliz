@@ -32,4 +32,39 @@ const add: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-export default { browse, add };
+
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+    const { distance } = req.body;
+
+    if (!distance || Number.isNaN(Number(distance))) {
+      res.status(400).json({ message: "Invalid distance value" });
+      return;
+    }
+
+    const result = await historyRepository.update(id, {
+      distance: Number(distance),
+    });
+
+    if (result.affectedRows === 0) {
+      res.status(404).json({ message: "History entry not found" });
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const remove: RequestHandler = async (req, res, next) => {
+  try {
+    const entryId = Number(req.params.id);
+    await historyRepository.delete(entryId);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, add, edit, remove };

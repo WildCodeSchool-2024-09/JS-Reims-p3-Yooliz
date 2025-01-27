@@ -61,5 +61,33 @@ class HistoryRepository {
     );
     return result.insertId;
   }
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "delete from history where id = ?",
+      [id],
+    );
+    return result;
+  }
+  async update(id: number, changes: { distance: number }) {
+    try {
+      const [rows] = await databaseClient.query<Result>(
+        "SELECT * FROM history WHERE id = ?",
+        [id],
+      );
+      const existingEntry = (rows as unknown as HistoryEntry[])[0];
+      if (!existingEntry) {
+        return { affectedRows: 0 };
+      }
+      const [result] = await databaseClient.query<Result>(
+        "UPDATE history SET distance = ? WHERE id = ?",
+        [changes.distance, id],
+      );
+
+      return result;
+    } catch (error) {
+      console.error("Error updating history:", error);
+      throw new Error("Failed to update history entry");
+    }
+  }
 }
 export default new HistoryRepository();

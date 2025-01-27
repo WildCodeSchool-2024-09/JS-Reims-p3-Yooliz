@@ -17,6 +17,11 @@ function SignIn() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
+
+  const handlePasswordToggle = () => {
+    setPasswordType(passwordType === "password" ? "text" : "password");
+  };
 
   const { setAuth } = useOutletContext<{
     setAuth: (auth: Auth | null) => void;
@@ -87,18 +92,30 @@ function SignIn() {
           <div className="password-input-container">
             <input
               ref={passwordRef}
-              type="password"
+              type={passwordType}
               id="password"
               name="password"
               placeholder="Votre mot de passe"
               required
             />
-            <button type="button" className="password-toggle-button">
-              <img
-                src="./src/assets/icons/close-eye.png"
-                alt="Show password"
-                className="password-icon"
-              />
+            <button
+              type="button"
+              className="password-toggle-button"
+              onClick={handlePasswordToggle}
+            >
+              {passwordType === "password" ? (
+                <img
+                  src="./src/assets/icons/close-eye.png"
+                  alt="Show password"
+                  className="password-icon"
+                />
+              ) : (
+                <img
+                  src="./src/assets/icons/view.png"
+                  alt="Hide password"
+                  className="password-icon"
+                />
+              )}
             </button>
           </div>
         </div>

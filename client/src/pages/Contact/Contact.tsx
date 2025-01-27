@@ -2,9 +2,17 @@ import type React from "react";
 import { useState } from "react";
 import "./Contact.css";
 
+const validCategories = [
+  "Renouvellement",
+  "Flotte",
+  "Besoin",
+  "Autre",
+] as const;
+type Category = (typeof validCategories)[number];
+
 function Contact() {
   const [email, setEmail] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<Category | "">("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({
     email: "",
@@ -27,8 +35,8 @@ function Contact() {
       valid = false;
     }
 
-    if (category === "") {
-      errors.category = "Veuillez sélectionner une catégorie.";
+    if (!validCategories.includes(category as Category)) {
+      errors.category = "Veuillez sélectionner une catégorie valide.";
       valid = false;
     }
 
@@ -48,9 +56,10 @@ function Contact() {
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify({
               contact_email: email,
-              category,
+              category: category,
               message: description,
             }),
           },
@@ -92,10 +101,10 @@ function Contact() {
             name="categorie"
             id="categorie"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => setCategory(e.target.value as Category)}
           >
             <option value="">Choisissez une catégorie</option>
-            <option value="Renouvelement">Renouvellement de véhicule</option>
+            <option value="Renouvellement">Renouvellement de véhicule</option>
             <option value="Flotte">Flotte</option>
             <option value="Besoin">Besoin d'un conseil</option>
             <option value="Autre">Autre</option>

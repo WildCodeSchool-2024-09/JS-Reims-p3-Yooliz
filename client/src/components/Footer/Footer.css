@@ -4,14 +4,13 @@
   gap: 1rem;
   background-color: rgba(0, 0, 0, 0.04);
   padding: 1rem;
-  margin-top: 0.5rem;
 }
 
 .footer-link-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .footer-link {

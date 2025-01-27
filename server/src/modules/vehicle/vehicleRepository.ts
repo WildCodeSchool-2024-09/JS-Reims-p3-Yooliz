@@ -72,19 +72,12 @@ class VehicleRepository {
     return rows as Vehicle[];
   }
 
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing vehicle
-
-  // async update(vehicle: Vehicle) {
-  //   ...
-  // }
-
-  // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an vehicle by its ID
-
-  // async delete(id: number) {
-  //   ...
-  // }
+  async delete(vehicle: Partial<Vehicle>) {
+    await databaseClient.query<Result>(
+      "delete from vehicle where id = ? and owner_id = ?",
+      [vehicle.id, vehicle.owner_id],
+    );
+  }
 }
 
 export default new VehicleRepository();

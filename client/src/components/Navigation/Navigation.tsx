@@ -6,10 +6,10 @@ function Navigation({ handleClick }: { handleClick: () => void }) {
     <nav className="nav-container" aria-label="Navigation principale">
       <Link
         onClick={handleClick}
-        to="/comparer"
+        to="/moncomparatif"
         className="nav-link"
         aria-current={
-          window.location.pathname === "/comparer" ? "page" : undefined
+          window.location.pathname === "/moncomparatif" ? "page" : undefined
         }
       >
         Mon comparatif

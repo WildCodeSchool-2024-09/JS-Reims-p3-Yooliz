@@ -2,50 +2,65 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5rem;
+  margin-top: 0.5rem;
   height: 100%;
 }
 
 .habits h2 {
   font-family: var(--font-family-title);
   font-size: 2rem;
-  margin: 0;
-}
-
-.habits input {
-  width: 60vw;
-  max-width: 300px;
-  border: .5px solid var(--primary-color);
-  font-family: var(--font-family-texte);
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .habits label {
-  width: 20rem;
+  width: 50rem;
   text-align: center;
   padding: 0;
 }
 
 .habits-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .input-container {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-line-container {
+  display: flex;
   align-items: center;
-  position: relative;
-  min-height: 80px;
-  margin-bottom: 1rem;
-  gap: 0.5rem;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: center;
+  font-family: var(--font-family-texte);
+  font-size: larger;
+}
+
+.distance-input {
+  width: 80px;
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.distance-input::placeholder {
+  font-style: italic;
+  color: #999;
+}
+
+.distance-input.error-habits {
+  border-color: #ff0000;
 }
 
 .input-container-distance {
@@ -69,19 +84,12 @@
 }
 
 .option {
-  padding: 0 0.6rem;
-  height: 2.6rem;
-  width: 60vw;
-  max-width: 300px;
-  text-align: start;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-family: var(--font-family-texte);
-  font-size: 1rem;
-  color: #333;
+  min-width: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
   background-color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .option:hover:not(:disabled) {
@@ -96,19 +104,11 @@
 }
 
 .error-message-habits {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  width: 100%;
+  color: #ff0000;
+  font-size: 14px;
   text-align: center;
-  color: #ff0f0f;
-  font-size: 0.7rem;
-  font-family: var(--font-family-texte);
-  animation: slideIn 0.3s ease-in-out;
-  margin: 0;
-  padding: 0;
-  height: 20px;
-  pointer-events: none;
+  margin-top: 5px;
+  vertical-align: middle;
 }
 
 .error-habits {
@@ -167,5 +167,19 @@
     width: 55vw;
     display: flex;
     justify-content: end;
+  }
+  .input-line-container {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  .distance-input {
+    width: 60px;
+    padding: 6px;
+  }
+
+  .option {
+    min-width: 80px;
+    padding: 6px;
   }
 }

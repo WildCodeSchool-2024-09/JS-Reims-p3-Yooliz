@@ -39,20 +39,20 @@ function Confirm() {
           />
         ))}
         <button
-          className="modify-button"
-          type="button"
-          onClick={handleGoBack}
-          disabled={vehicles.length === 0}
-        >
-          Modifier le véhicule sélectionné
-        </button>
-        <button
           className="confirmation-button"
           type="button"
           onClick={handleConfirm}
           disabled={vehicles.length === 0}
         >
           Valider et passer à l'étape suivante
+        </button>
+        <button
+          className="modify-button"
+          type="button"
+          onClick={handleGoBack}
+          disabled={vehicles.length === 0}
+        >
+          Changer mon choix de véhicule
         </button>
       </div>
     </>

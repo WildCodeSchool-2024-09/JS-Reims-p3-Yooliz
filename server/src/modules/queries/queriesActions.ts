@@ -27,12 +27,28 @@ const read: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const newQuery = {
-      contact_email: req.body.contact_email,
-      category: req.body.category,
-      message: req.body.message,
-    };
-    const insertId = await queriesRepository.create(newQuery);
+    const { contact_email, category, message } = req.body;
+
+    if (!contact_email || !category || !message) {
+      res.status(400).json({ message: "Missing required fields" });
+      return;
+    }
+
+    const validCategories = ["Renouvellement", "Flotte", "Besoin", "Autre"];
+    if (!validCategories.includes(category)) {
+      res.status(400).json({
+        message: `Invalid category. Must be one of: ${validCategories.join(
+          ", ",
+        )}`,
+      });
+      return;
+    }
+
+    const insertId = await queriesRepository.create({
+      contact_email,
+      category,
+      message,
+    });
     res.status(201).json({ insertId });
   } catch (err) {
     next(err);
@@ -48,7 +64,9 @@ const edit: RequestHandler = async (req, res, next) => {
       message: req.body.message,
       submit_date: new Date(req.body.submit_date),
     };
-    await queriesRepository.update(updatedQuery);
+    await queriesRepository.update(updatedQuery.id, {
+      message: updatedQuery.message,
+    });
     res.sendStatus(204);
   } catch (err) {
     next(err);

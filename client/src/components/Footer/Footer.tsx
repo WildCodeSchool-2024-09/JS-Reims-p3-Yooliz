@@ -13,14 +13,11 @@ function Footer() {
           <Link to="/contact" className="footer-link">
             Contact
           </Link>
-          <Link to="/info" className="footer-link">
+          <Link to="/versdemain" className="footer-link">
             Vers demain
           </Link>
-          <Link to="/about-us" className="footer-link">
+          <Link to="/quisommesnous" className="footer-link">
             Qui sommes-nous ?
-          </Link>
-          <Link to="/termes" className="footer-link">
-            Termes
           </Link>
         </div>
         <div className="footer-icon-container">

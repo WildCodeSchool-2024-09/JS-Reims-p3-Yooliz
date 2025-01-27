@@ -1,101 +1,266 @@
 .admin-container {
-  padding: 20px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 85vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   font-family: var(--font-family-texte);
-  text-align: center;
-  margin: 0;
 }
 
-@media screen and (min-width: 768px) {
-  .admin-container {
-    margin: 0 25%;
-  }
-}
-
-h2 {
-  text-align: center;
-  font-family: var(--font-family-title);
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
+h2,
 h3 {
   text-align: center;
   font-family: var(--font-family-title);
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
-.queries-list {
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+.queries-section,
+.history-section,
+.users-section {
+  width: 100%;
+  max-width: 90%;
+  margin: 1rem 0;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  scroll-margin-top: 2rem;
+}
+
+.queries-list,
+.history-list,
+.users-list {
   list-style-type: none;
   padding: 0;
   width: 100%;
-  margin-bottom: 2rem;
 }
 
-.query-item {
-  border: 1px solid var(--primary-color);
-  padding: 10px;
-  margin-bottom: 10px;
+.query-item,
+.history-item,
+.user-item {
+  border: 1px solid #27dda64b;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: white;
+  transition: transform 0.3s ease;
+}
+
+.query-item:hover,
+.history-item:hover,
+.user-item:hover {
+  transform: translateY(-1px);
+}
+
+.query-item p,
+.history-item p,
+.user-details p {
+  line-height: 1.4;
+  padding: 0.8rem;
+  background-color: #f5f5f5;
+}
+
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.user-header h4 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1rem;
+  font-family: var(--font-family-title);
+}
+
+.user-badge {
+  padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  box-shadow: var(--box-shadow);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
-.query-item p {
-  margin: 5px 0;
+.user-badge.admin {
+  background-color: var(--result-red-color);
+  color: #dc3545;
 }
 
-.error {
-  color: red;
-  text-align: center;
-  font-family: var(--font-family-texte);
+.user-badge.user {
+  background-color: var(--result-green-color);
+  color: #28a745;
+}
+
+.user-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.user-details strong {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
 }
 
 .admin-buttons-container {
   display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.admin-edit-button,
+.admin-delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-family-texte);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-edit-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.admin-delete-button {
+  background-color: var(--result-red-color);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.admin-edit-button:hover {
+  background-color: #20c997;
+}
+
+.admin-delete-button:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.error {
+  color: #dc3545;
+  font-size: small;
+  width: 10rem;
+  padding-left: .5rem;
+  padding-top: .5rem;
+}
+
+.admin-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-.admin-container button {
-  margin-left: 1rem;
-  margin-top: 1rem;
-  width: 7rem;
-  height: 2.5rem;
-  border: none;
-  background-color: var(--primary-color);
-  border-radius: 8px;
-  color: white;
-  box-shadow: var(--box-shadow);
-  transition: 0.4s;
-  cursor: pointer;
-}
-
-.admin button:hover {
-  background-color: var(--button-hover-bg-color);
-}
-
-.history-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-}
-.history-container h3 {
-  margin-bottom: 1rem;
-}
-.history-list {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-}
-.history-item {
+.admin-nav-button {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
   border: 1px solid var(--primary-color);
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  color: var(--primary-color);
+  font-family: var(--font-family-texte);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-nav-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@media screen and (min-width: 768px) {
+  .admin-container {
+    padding: 2rem;
+  }
+
+  .queries-section,
+  .history-section,
+  .users-section {
+    max-width: 80%;
+  }
+
+  .query-item,
+  .history-item,
+  .user-item {
+    padding: 1.5rem;
+  }
+
+  .admin-buttons-container {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .query-item:hover .admin-buttons-container,
+  .history-item:hover .admin-buttons-container,
+  .user-item:hover .admin-buttons-container {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .user-badge {
+    align-self: flex-start;
+  }
+
+  .admin-navigation {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 1rem;
+  }
+
+  .back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
 }
