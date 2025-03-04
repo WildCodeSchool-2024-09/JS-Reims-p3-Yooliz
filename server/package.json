@@ -5,7 +5,7 @@
     "dev": "tsx watch --clear-screen=false ./src/main",
     "db:migrate": "tsx ./bin/migrate",
     "db:seed": "tsx ./bin/seed",
-    "build": "tsx ./bin/migrate && tsc ./src/main --outDir ../dist --esModuleInterop",
+    "build": "tsx ./bin/migrate && tsc ./src/main ./src/types/express/index.d.ts --outDir ../dist --esModuleInterop",
     "start": "node ../dist/src/main",
     "test": "jest --verbose",
     "hash-passwords": "tsx database/hashPasswords.ts"
